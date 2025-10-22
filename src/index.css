@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+html,
+body {
+  background: #FFF9FE;
+}
+
+.allpages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 1000px;
+}
+
+.avatericon  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatertext {
+  transform: translateX(80px);
+  z-index: 20px;
+  position: absolute;
+  margin-left: 30px;
+}
+
+.css-1aokcuq {
+    border: 1px solid green;
+    width: 500px;
+}
+
+.progressbar {
+    width: 700px;
+    padding-top: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    text-align: center;
+    font-size: 25px;
+}
+
+/* TEXT ANIMATION */
+.tasktex {
+    background: linear-gradient(
+        90deg, 
+        #6366F1 0%, 
+        #8B5CF6 25%,
+        #D946EF 50%,
+        #8B5CF6 75%,
+        #6366F1 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    display: inline-block;
+    animation: gradient-flow 3s ease infinite;
+}
+
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.tasktext {
+    background: linear-gradient(
+        90deg, 
+        #ff6d00 0%, 
+        #c1121f 25%,
+        #fb8500 50%,
+        #4cc9f0 75%,
+        #80b918 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 1.2;
+    display: inline-block;
+    animation: gradient-flow 3s ease infinite;
+}
+
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.tsktext {
+    background: linear-gradient(
+        90deg, 
+        #dd1c1a 0%, 
+        #c1121f 25%,
+        #e5383b 50%,
+        #ef233c 75%,
+        #d62839 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+    display: inline-block;
+    animation: gradient-flow 3s ease infinite;
+}
+
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.tastext {
+    background: linear-gradient(
+        90deg, 
+        #e2eafc 0%, 
+        #0353a4 25%,
+        #00a8e8 50%,
+        #072ac8 75%,
+        #49b6ff 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+    display: inline-block;
+    animation: gradient-flow 3s ease infinite;
+}
+
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.tsktext {
+    background: linear-gradient(
+        90deg, 
+        #dd1c1a 0%, 
+        #c1121f 25%,
+        #e5383b 50%,
+        #ef233c 75%,
+        #d62839 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+    display: inline-block;
+    animation: gradient-flow 3s ease infinite;
+}
+
+/* TEXT ANIMATION */
