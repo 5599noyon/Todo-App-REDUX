@@ -1,22 +1,25 @@
+import { addTodo } from "@/features/todo/todoSlice";
 import useTodo from "@/hooks/useTodo"
 import { Box, Button, Group, Input } from "@chakra-ui/react"
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const CreatTodo = () => {
-  const {craeteTodo, todo } = useTodo();
+  const { todos: todo } = useSelector((state) => state.todos); 
   const [message, setMessage] = useState("");
+  const dispatch = useDispatch();
+
   const [newTodo, setNewTodo] = useState(
     {
     text: "" ,
     isEdit: false,
     isComplete: false,
-  }
-  )
+  });
 
   const handleAddTodo = () => {
     if (newTodo.text.trim() !== "" && newTodo.text.length > 2) {
-      craeteTodo(newTodo);
+      dispatch(addTodo(newTodo));
       setNewTodo({...newTodo, text: ""});
       setMessage("");
     }
@@ -49,9 +52,11 @@ const CreatTodo = () => {
      
         <Input onChange={(e) => setNewTodo({...newTodo, id: todo?.length+1, text: e.target.value })} 
         paddingTop={"23px"} paddingBottom={"23px"} borderRadius={"10px"} outline={"none"} border={"1px solid #FFFFFF"} flex="1" color={"whiteAlpha.950"} fontWeight={"semibold"} fontSize={"15px"} placeholder="Enter your todo" value={newTodo.text} />
+
       <Button onClick={handleAddTodo} paddingTop={"23px"} paddingBottom={"23px"} borderRadius={"10px"} bg="#FFFFFF" color={"#000000"} border={"1px solid #FFFFFF"} variant="outline" >
-        Submit
+        ADD TODO
       </Button>
+      
     </Group> 
     </Box>
 

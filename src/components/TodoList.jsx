@@ -1,29 +1,37 @@
-import useTodo from '@/hooks/useTodo'
-import { Box, Button, Checkbox, CheckboxCard, Flex, For, Grid, GridItem, Input, Stack, Text } from '@chakra-ui/react'
+import { deleteTodo, updateTodo, completeTodo, isEdit } from '@/features/todo/todoSlice'
+import { Box, Button, Checkbox, Flex, Grid, GridItem, Input, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FaEdit } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
 
 const TodoList = ({todo}) => {
-  const {delteTodo, completeTodo, editTodo, updateTodo } = useTodo();
   const [ editTodoState, seteditTodoState ] = useState(todo.text || "" );
+  const dispatch = useDispatch();
 
   const handleComplete = () => {
-    completeTodo(todo.id)
+    dispatch(completeTodo(todo.id));
   };
 
   const handleEdit = () => {
-    editTodo(todo.id)
+    dispatch(isEdit(todo.id));
   };
 
-    const handleupdate = () => {
-    updateTodo(todo.id, editTodoState )
+  const handleUpdate = () => {
+    if (editTodoState.trim() === "") return; // do not update to empty
+    dispatch(updateTodo({ id: todo.id, text: editTodoState }));
+    // updateTodo reducer sets isEdit = false; do not toggle isEdit here
   };
+
+  // Keep local input state in sync when todo changes (e.g., entering edit mode)
+  React.useEffect(() => {
+    seteditTodoState(todo.text || "");
+  }, [todo.text, todo.isEdit]);
 
   return (
      <Grid templateColumns="repeat(12, 1fr)" gap="6" display={"flex"} alignItems={"center"} justifyContent={"center"} marginTop={"30px"} >
       <GridItem colSpan={1}>
-        <Checkbox.Root checked={todo.isComplete} onChange={handleComplete}>
+        <Checkbox.Root checked={todo.isComplete} onChange={handleComplete} >
       <Checkbox.HiddenInput color={"white"} borderRadius={"full"}  />
       <Checkbox.Control color={"white"} borderRadius={"full"}  />
     </Checkbox.Root>
@@ -33,8 +41,9 @@ const TodoList = ({todo}) => {
         {
 
           todo.isEdit?
-          <Input border={"2px solid green"} color={"whiteAlpha.950"} fontSize={"17px"} fontWeight={"semibold"} borderRadius={"10px"} w={"600px"} type='text' value={editTodoState} 
-          onChange={(e) => seteditTodoState(e.target.value) } />
+          <Input border={"2px solid green"} color={"whiteAlpha.950"} fontSize={"17px"} fontWeight={"semibold"} borderRadius={"10px"} w={"600px"} type='text' value={editTodoState}
+          onChange={(e) => seteditTodoState(e.target.value) }
+          onKeyDown={(e) => { if (e.key === 'Enter') handleUpdate(); }} />
           :
           <Text  border={"2px solid green"} color={"whiteAlpha.950"} paddingLeft={"10px"} w={"600px"} paddingTop={"6px"} paddingBottom={"6px"} fontSize={"17px"} fontWeight={"semibold"} borderRadius={"10px"} >
           {todo.isComplete? <del>{todo.text}</del> : todo.text }
@@ -47,7 +56,7 @@ const TodoList = ({todo}) => {
         <Flex display={"flex"} alignItems={"center"} gap={"10px"} justify={"end"} >
         {todo.isEdit? 
         <>
-        <Button onClick={handleupdate} colorPalette="green" variant="outline">
+        <Button onClick={handleUpdate} colorPalette="green" variant="outline">
         <Text>UPDATE</Text>
       </Button>
         </>
@@ -57,7 +66,7 @@ const TodoList = ({todo}) => {
         <FaEdit color='blue' />
       </Button>
 
-       <Button onClick={() => delteTodo(todo.id) } colorPalette="red" variant="outline">
+       <Button onClick={() => dispatch(deleteTodo(todo.id))} colorPalette="red" variant="outline">
         <MdDelete color='red' />
       </Button>
       </>

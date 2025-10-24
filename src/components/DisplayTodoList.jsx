@@ -1,10 +1,10 @@
-import useTodo from "@/hooks/useTodo"
 import TodoList from "./TodoList";
 import { Flex } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 
 const DisplayTodoList = () => {
-  const {todo} = useTodo();
+  const { todos: todo } = useSelector((state) => state.todos);
 
   return (
     <Flex flexDirection={"column"} >

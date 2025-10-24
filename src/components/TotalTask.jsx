@@ -1,9 +1,8 @@
 import { Box, Circle, Grid, GridItem, Text } from "@chakra-ui/react"
-import { useContext } from "react";
-import { TodoContext } from "../../context/todoContext";
+import { useSelector } from "react-redux";
 
 const TotalTask = () => {
-  const {todo} = useContext(TodoContext);
+  const { todos: todo } = useSelector((state) => state.todos);
   const completeTodo = todo?.filter((t) => t.isComplete );
 
   const progressBar = {
@@ -54,7 +53,7 @@ const TotalTask = () => {
                 <Text className=" tasktex text-sm font-medium text-gray-600">Completed</Text>
               </Box>
               <Box className="text-3xl tsktext font-bold text-green-600">
-                {progressBar.completed}
+                { progressBar.completed }
               </Box>
             </Box>
 
@@ -64,7 +63,7 @@ const TotalTask = () => {
                 <Text className=" tasktex text-sm font-medium text-gray-600">Remaining</Text>
               </Box>
               <Box className="text-3xl font-bold tastext text-indigo-600">
-                {progressBar.total - progressBar.completed}
+                { progressBar.total - progressBar.completed }
               </Box>
             </Box>
           </Box>
